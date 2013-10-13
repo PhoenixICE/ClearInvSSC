@@ -34,7 +34,6 @@ namespace ClearInvSSC
         }
         public override void Initialize()
         {
-            ServerApi.Hooks.NetGreetPlayer.Register(this, OnGreetPlayer);
             ServerApi.Hooks.NetGetData.Register(this, OnGetData);
         }
 
@@ -137,7 +136,6 @@ namespace ClearInvSSC
         {
             if (disposing)
             {
-                ServerApi.Hooks.NetGreetPlayer.Deregister(this, OnGreetPlayer);
                 ServerApi.Hooks.NetGetData.Deregister(this, OnGetData);
             }
             base.Dispose(disposing);
