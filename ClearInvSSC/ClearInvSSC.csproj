@@ -38,10 +38,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="TerrariaServer">
-      <HintPath>..\..\..\Visual Studio 2013\Projects\tshock references\TerrariaServer.exe</HintPath>
+      <HintPath>..\..\..\Visual Studio 2012\Projects\References\TerrariaServer.exe</HintPath>
     </Reference>
     <Reference Include="TShockAPI">
-      <HintPath>..\..\TShock\TShockAPI\bin\Debug\TShockAPI.dll</HintPath>
+      <HintPath>..\..\..\Visual Studio 2012\Projects\References\TShockAPI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

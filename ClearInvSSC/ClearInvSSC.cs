@@ -34,13 +34,31 @@ namespace ClearInvSSC
         }
         public override void Initialize()
         {
-            ServerApi.Hooks.NetGreetPlayer.Register(this, OnGreetPlayer);
+            ServerApi.Hooks.NetGetData.Register(this, OnGetData);
         }
-        private void OnGreetPlayer(GreetPlayerEventArgs args)
+
+        protected override void Dispose(bool disposing)
         {
-            if (TShock.Config.ServerSideCharacter)
+            if (disposing)
+                ServerApi.Hooks.NetGetData.Deregister(this, OnGetData);
+            base.Dispose(disposing);
+        }
+
+        private void OnGetData(GetDataEventArgs args)
+        {
+            if (args.MsgID == PacketTypes.TileGetSection)
             {
-                var player = TShock.Players[args.Who];
+                if (Netplay.serverSock[args.Msg.whoAmI].state == 2)
+                {
+                    ClearnInventory(args.Msg.whoAmI);
+                }
+            }
+        }
+        private void ClearnInventory(int Who)
+        {
+            if (TShock.Config.ServerSideCharacter && !TShock.Players[Who].IsLoggedIn)
+            {
+                var player = TShock.Players[Who];
                 player.TPlayer.statLife = 100;
                 player.TPlayer.statLifeMax = 100;
                 player.TPlayer.statMana = 0;
@@ -119,14 +137,6 @@ namespace ClearInvSSC
                 NetMessage.SendData(50, -1, -1, "", player.Index, 0f, 0f, 0f, 0);
                 NetMessage.SendData(50, player.Index, -1, "", player.Index, 0f, 0f, 0f, 0);
             }
-        }
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                ServerApi.Hooks.NetGreetPlayer.Deregister(this, OnGreetPlayer);
-            }
-            base.Dispose(disposing);
         }
     }
 }
