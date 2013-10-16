@@ -25,7 +25,7 @@ namespace ClearInvSSC
         }
         public override string Description
         {
-            get { return "Clear Inventory if SSC Activated"; }
+            get { return "Clear Inventory/buffs if SSC Activated"; }
         }
         public ClearInvSSC(Main game)
             : base(game)
@@ -50,11 +50,11 @@ namespace ClearInvSSC
             {
                 if (Netplay.serverSock[args.Msg.whoAmI].state == 2)
                 {
-                    ClearnInventory(args.Msg.whoAmI);
+                    CleanInventory(args.Msg.whoAmI);
                 }
             }
         }
-        private void ClearnInventory(int Who)
+        private void CleanInventory(int Who)
         {
             if (TShock.Config.ServerSideCharacter && !TShock.Players[Who].IsLoggedIn)
             {
