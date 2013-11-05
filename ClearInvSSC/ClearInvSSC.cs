@@ -59,10 +59,6 @@ namespace ClearInvSSC
             if (TShock.Config.ServerSideCharacter && !TShock.Players[Who].IsLoggedIn)
             {
                 var player = TShock.Players[Who];
-                player.TPlayer.statLife = 100;
-                player.TPlayer.statLifeMax = 100;
-                player.TPlayer.statMana = 0;
-                player.TPlayer.statManaMax = 0;
                 player.TPlayer.SpawnX = -1;
                 player.TPlayer.SpawnY = -1;
                 player.sX = -1;
@@ -129,13 +125,6 @@ namespace ClearInvSSC
                 NetMessage.SendData(4, player.Index, -1, player.Name, player.Index, 0f, 0f, 0f, 0);
                 NetMessage.SendData(42, player.Index, -1, "", player.Index, 0f, 0f, 0f, 0);
                 NetMessage.SendData(16, player.Index, -1, "", player.Index, 0f, 0f, 0f, 0);
-
-                for (int k = 0; k < 10; k++)
-                {
-                    player.TPlayer.buffType[k] = 0;
-                }
-                NetMessage.SendData(50, -1, -1, "", player.Index, 0f, 0f, 0f, 0);
-                NetMessage.SendData(50, player.Index, -1, "", player.Index, 0f, 0f, 0f, 0);
             }
         }
     }
