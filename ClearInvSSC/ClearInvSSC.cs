@@ -35,7 +35,7 @@ namespace ClearInvSSC
         public override void Initialize()
         {
             ServerApi.Hooks.NetGetData.Register(this, OnGetData);
-            Commands.ChatCommands.Add(new Command("clearinv", ResetInventory, "invreset"));
+            Commands.ChatCommands.Add(new Command(new List<string>(){"clearinv","clearinv.*"}, ResetInventory, "invreset"));
         }
 
         protected override void Dispose(bool disposing)
@@ -136,6 +136,13 @@ namespace ClearInvSSC
             {
                 if (TShock.Config.ServerSideCharacter)
                 {
+                    if (player.Group.HasPermission("clearinv.*"))
+                    {
+                        player.TPlayer.statLife = 100;
+                        player.TPlayer.statLifeMax = 100;
+                        player.TPlayer.statMana = 20;
+                        player.TPlayer.statManaMax = 20;
+                    }
                     for (int i = 0; i < NetItem.maxNetInventory; i++)
                     {
                         if (i < NetItem.maxNetInventory - (NetItem.armorSlots + NetItem.dyeSlots))
