@@ -56,7 +56,7 @@ namespace ClearInvSSC
 		}
 		private void CleanInventory(int Who)
 		{
-			if (TShock.Config.ServerSideCharacter && !TShock.Players[Who].IsLoggedIn)
+			if (TShock.ServerSideCharacterConfig.Enabled && !TShock.Players[Who].IsLoggedIn)
 			{
 				var player = TShock.Players[Who];
 				player.TPlayer.SpawnX = -1;
